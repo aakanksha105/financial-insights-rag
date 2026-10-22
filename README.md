@@ -4,6 +4,15 @@ A source-first financial research application built with Python, LangChain's Ope
 
 **Status:** implemented and privately deployed to Google Cloud Run. 29 automated tests pass locally. Docker and cloud smoke tests cover document retrieval, conversational follow-ups, Python-calculated growth, and unsupported-answer refusal. See `reports/VALIDATION.md` for evidence and evaluation limits.
 
+
+## Screenshots
+
+### Revenue growth calculated by Python
+![Revenue growth with source citations](docs/screenshots/revenue-growth.png)
+
+### Refusal when evidence is missing
+![Unsupported question refusal](docs/screenshots/unsupported-question.png)
+
 ## Architecture
 
 ```mermaid
