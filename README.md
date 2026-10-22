@@ -117,7 +117,3 @@ Follow `docs/DEPLOYMENT.md` for Secret Manager, dedicated runtime identity, Clou
 This is a bounded portfolio implementation, not a regulated investment platform. No live financial feed, OCR, robust table parser, general-purpose financial calculation engine, reranker, automated entailment verifier, authentication, per-user billing, or durable chat/index storage. Docker, macOS execution, and private Cloud Run smoke checks were completed separately. Broad live-model quality has not been established. Streamlit reconnects and instance changes can lose sessions. Large or malicious PDFs may consume parsing resources despite byte limits; production uploads need isolated workers and document/page/time quotas. Caches are session-local and bounded indirectly by the corpus limit but repeated corpus replacement can grow the cache: delete workspace to release it.
 
 Next improvements should follow measured failures: real-document evaluation, structured table extraction/calculations, calibrated retrieval refusal, authenticated sessions, quotas, durable immutable indexes, and monitoring. Avoid adding agents or distributed infrastructure without a demonstrated use case.
-
-## Interview explanation
-
-Explain: why exact FAISS cosine search; why history is rewritten rather than treated as evidence; how stable chunk IDs connect claims to sources; what citation checks cannot prove; why Cloud Run session data is temporary; and how a real evaluation differs from a deterministic fixture.
