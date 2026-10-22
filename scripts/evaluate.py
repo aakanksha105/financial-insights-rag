@@ -34,6 +34,12 @@ def main():
             answer,evidence=RAGService(r).ask(q["question"],[])
             row.update(answer=answer.model_dump(),evidence=evidence,human_review=None)
         rows.append(row)
-    report={"mode":a.mode,"k":a.k,"retrieval_unit":"unique document ranked by first retrieved chunk; cutoff applied to chunks", "warning":"Tiny fictional fixture; offline keyword embeddings do not measure OpenAI semantic retrieval or answer grounding.","recall_at_k":sum(x["recall_at_k"] for x in rows)/len(rows),"mrr":sum(x["reciprocal_rank"] for x in rows)/len(rows),"rows":rows}
+    report={"mode":a.mode,"k":a.k,"retrieval_unit":"unique document ranked by first retrieved chunk; cutoff applied to chunks", "warning":(
+    "Tiny fictional fixture; keyword embeddings validate pipeline behavior, "
+    "not OpenAI semantic retrieval or answer grounding."
+    if a.mode == "offline" else
+    "Tiny fictional fixture using OpenAI embeddings; retrieval metrics "
+    "do not establish answer grounding or real-world accuracy."
+),"recall_at_k":sum(x["recall_at_k"] for x in rows)/len(rows),"mrr":sum(x["reciprocal_rank"] for x in rows)/len(rows),"rows":rows}
     out=Path(a.output);out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(report,indent=2));print(json.dumps({k:v for k,v in report.items() if k!="rows"},indent=2))
 if __name__=="__main__": main()

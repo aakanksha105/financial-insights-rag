@@ -2,7 +2,7 @@
   "mode": "offline",
   "k": 3,
   "retrieval_unit": "unique document ranked by first retrieved chunk; cutoff applied to chunks",
-  "warning": "Tiny fictional fixture; offline keyword embeddings do not measure OpenAI semantic retrieval or answer grounding.",
+  "warning": "Tiny fictional fixture; keyword embeddings validate pipeline behavior, not OpenAI semantic retrieval or answer grounding.",
   "recall_at_k": 1.0,
   "mrr": 1.0,
   "rows": [

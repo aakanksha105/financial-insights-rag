@@ -45,12 +45,12 @@ python -m pip install -e . --no-deps
 cp .env.example .env
 ```
 
-Edit `.env` locally to set **your own OpenAI API key**. Never commit it or paste it into chat. ChatGPT subscriptions do not supply application API credits. The model names are configurable; access must be verified in your account. Dependencies are pinned to the versions resolved and installed in the supplied validation environment; macOS installation itself has not been executed here. If FAISS has no wheel for your Python/platform, use Python 3.12 and the Docker path rather than silently substituting another retriever.
+Edit `.env` locally to set **your own OpenAI API key**. Never commit it or paste it into chat. ChatGPT subscriptions do not supply application API credits. The model names are configurable; access must be verified in your account. Dependencies are pinned to the versions resolved and installed in the supplied validation environment; local macOS execution and Docker operation were subsequently validated. If FAISS has no wheel for your Python/platform, use Python 3.12 and the Docker path rather than silently substituting another retriever.
 
 ```bash
 pytest -q
 python scripts/evaluate.py --mode offline --output reports/offline.json
-streamlit run app.py
+python -m streamlit run app.py
 ```
 
 Open http://localhost:8501. Click **Build / replace research index** with the sample checkbox enabled. Ask “What was Northstar's 2024 revenue?” then “How did that compare with 2023?” The fictional fixture reports USD 120 million and USD 100 million respectively. A 20% change is a derived calculation `(120-100)/100*100`, not a separately reported source value. Ask “What is its 2025 revenue forecast?” and verify abstention. Inspect source evidence, download citations, then upload a real public report and repeat.
@@ -68,10 +68,22 @@ The generation prompt restricts factual claims to evidence, preserves currency/p
 - Session-local indexes/cache isolate browser sessions; no globally cached private documents. No authentication or durable user accounts are included.
 - Explicit submit controls avoid embedding on each Streamlit rerun. Identical text embeddings are reused within the session; new questions are embedded once. Follow-ups cost an additional rewrite call.
 - 12 files, 10 MiB/file, 1,500 chunks, 450-token chunks, 70-token overlap, top 5 retrieval. History is bounded to 1,800 tokens, evidence to 5,000, question to 600, answer to 1,000 output tokens. Metadata is included in evidence budget. These caps reserve headroom for prompt/schema overhead; verify the configured model supports at least a 16K context.
-- Request timeout and two SDK retries handle transient API errors. Errors show generic guidance; logs include exception class only. No automatic infinite retry or provider error payload logging.
+- Embeddings use batches of 8, a 60-second timeout, and up to 6 SDK retries. Chat requests use a 45-second timeout and up to 2 SDK retries. Errors show generic guidance; logs include exception class only. No automatic infinite retry or provider error payload logging.
 - Exact normalized FAISS inner product is transparent and appropriate for a bounded corpus; approximate indexes add complexity with no demonstrated need here. No pickle deserialization.
 - No relevance cutoff is claimed: cosine values are model/corpus dependent. Non-answerability is determined by the prompted model and reviewed in evaluation.
 - Uploaded files and excerpts leave the app for OpenAI processing. A public unauthenticated deployment can incur API charges. Keep Cloud Run private for initial testing; add application authentication and enforce per-user quotas before offering a public demo.
+
+## Calculator and demo access
+
+Revenue-growth arithmetic uses Python Decimal after the model selects inputs.
+Validation accepts literal cited numbers or consistently scaled values with
+explicit thousand/million/billion/trillion labels. Mixed scales are rejected.
+This does not prove the selected numbers belong to matching companies,
+periods, currencies, or financial measures; inspect the cited evidence.
+
+Cloud Run is deployed privately. The public repository and screenshots provide
+the portfolio demonstration. Opening the cloud service requires authorized
+access; the service URL is not a public demo.
 
 ## Tests and evaluation
 
@@ -109,10 +121,3 @@ Next improvements should follow measured failures: real-document evaluation, str
 ## Interview explanation
 
 Explain: why exact FAISS cosine search; why history is rewritten rather than treated as evidence; how stable chunk IDs connect claims to sources; what citation checks cannot prove; why Cloud Run session data is temporary; and how a real evaluation differs from a deterministic fixture.
-
-Resume wording after you run the app successfully with your key:
-- Designed and implemented a financial-document RAG pipeline using LangChain, OpenAI embeddings, and FAISS with source-linked evidence retrieval.
-- Implemented token-aware chunking, semantic retrieval, structured citation checks, and multi-turn question rewriting with bounded context.
-- Added Docker configuration, automated tests, and reproducible retrieval evaluation; prepared Google Cloud Run deployment instructions.
-
-Change “added Docker configuration” to “containerized and validated” only after a successful Docker build/run. Add GCP deployment claims only after successful deployment. Add measured results only with the dataset, mode, and report that support them.

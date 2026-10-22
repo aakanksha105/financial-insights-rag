@@ -1,5 +1,7 @@
 # Validation record
 
+## Initial offline validation
+
 Executed October 21, 2026 in Linux x86_64, Python 3.12.14, isolated virtual environment.
 
 - Dependencies installed from package index; exact resolved versions in requirements.txt.
@@ -8,13 +10,13 @@ Executed October 21, 2026 in Linux x86_64, Python 3.12.14, isolated virtual envi
 - Streamlit initialization: no AppTest exceptions. Actual HTTP health endpoint on 127.0.0.1:8766 returned `ok`; server was stopped after check.
 - Offline fixture evaluation, K=3: Recall@3 1.0, MRR 1.0, four questions, three fictional documents. Keyword test embeddings, not OpenAI; these values are pipeline checks only. Full report: offline.json.
 
-Not executed: live OpenAI requests or semantic/grounded-answer quality evaluation; macOS install; Docker build/run (no Docker executable available); GCP deployment; GitHub publication. No coverage percentage or production latency measured. Streamlit interaction tests use mocked model responses, so they cannot establish real model correctness.
+Not executed during the initial offline validation: live OpenAI requests or semantic/grounded-answer quality evaluation; macOS install; Docker build/run (no Docker executable available); GCP deployment; GitHub publication. No coverage percentage or production latency measured. Streamlit interaction tests use mocked model responses, so they cannot establish real model correctness.
 
-Next validation: follow README local instructions with your key, save live evaluation and human review, test Docker, then privately deploy and repeat UI flow. Update this file only with observed results.
+Subsequent local and cloud checks are recorded below. Broad answer-grounding evaluation remains pending.
 
 ## Subsequent local and cloud validation
 
-- Latest local test run: 29 passed in 1.14 seconds.
+- Latest recorded local test run: 29 passed in 1.37 seconds.
 - Added calculator regression tests for revenue growth, invalid baselines,
   cited-input validation, explicit million conversions, and mixed-scale rejection.
 - Docker build/run and HTTP health check succeeded on the developer's Mac.
@@ -30,3 +32,10 @@ Next validation: follow README local instructions with your key, save live evalu
   not a real-world accuracy benchmark.
 - Broad grounded-answer evaluation, load testing, and public access are
   not validated. Deployment remains private.
+
+## GitHub publication
+
+- Source and screenshots published to a public GitHub repository.
+- GitHub Actions test and offline-evaluation workflow completed successfully.
+- No coverage percentage, production latency, load-test result, or broad
+  answer-grounding score has been measured.

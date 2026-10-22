@@ -1,6 +1,6 @@
 # Google Cloud Run deployment
 
-These commands require your GCP account, billing-enabled project, gcloud CLI, and permission to create Cloud Run, Cloud Build, Artifact Registry, IAM and Secret Manager resources. They incur costs. No deployment has been performed by the authoring session.
+These commands require your GCP account, billing-enabled project, gcloud CLI, and permission to create Cloud Run, Cloud Build, Artifact Registry, IAM and Secret Manager resources. They incur costs. A private deployment was completed and smoke-tested through an authenticated proxy; see reports/VALIDATION.md. The commands below describe setup for a new deployment.
 
 Cloud Run's writable filesystem is ephemeral and consumes instance memory. This version intentionally builds session-local FAISS indexes and does not promise persistence or cross-instance chat continuity. It binds `0.0.0.0:$PORT`.
 
