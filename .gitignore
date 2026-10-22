@@ -1,0 +1,20 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.streamlit/secrets.toml
+reports/live-*.json
+
+# Local backups and generated files
+*.bak
+*.zip
+upload/
+
+# Generated Python packaging metadata
+*.egg-info/
+build/
+dist/
+
+# Keep the placeholder configuration publishable
+!.env.example

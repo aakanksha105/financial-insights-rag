@@ -1,0 +1,12 @@
+.gcloudignore
+.git
+.venv
+.env*
+.streamlit
+__pycache__
+.pytest_cache
+*.pyc
+*.bak
+reports
+upload
+*.zip

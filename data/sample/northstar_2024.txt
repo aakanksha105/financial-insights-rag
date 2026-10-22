@@ -1,0 +1,6 @@
+FICTIONAL TEST FIXTURE — NOT AN ACTUAL COMPANY OR SEC FILING.
+Northstar Devices annual financial summary. Fiscal year ended December 31, 2024.
+Revenue was USD 120 million in 2024, compared with USD 100 million in 2023.
+Operating income was USD 18 million in 2024 and USD 12 million in 2023.
+Management attributed revenue growth to higher device shipment volumes.
+These simplified figures are created solely for software tests and demonstrations.

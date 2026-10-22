@@ -1,0 +1,6 @@
+[
+ {"id":"q1","question":"Northstar revenue in 2024 and 2023","relevant_files":["northstar_2024.txt"],"expected":"USD 120 million and USD 100 million","answerable":true},
+ {"id":"q2","question":"Harbor revenue and operating income","relevant_files":["harbor_2024.txt"],"expected":"EUR 80 million revenue and EUR 8 million operating income in fiscal 2024","answerable":true},
+ {"id":"q3","question":"Northstar Canada distribution announcement","relevant_files":["northstar_news.txt"],"expected":"January 15, 2025; terms not disclosed","answerable":true},
+ {"id":"q4","question":"Northstar 2025 revenue forecast","relevant_files":["northstar_news.txt"],"expected":"No forecast is supplied","answerable":false}
+]
